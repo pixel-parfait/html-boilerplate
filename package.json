@@ -1,0 +1,42 @@
+{
+    "name": "html-boilerplate",
+    "version": "1.0.0",
+    "description": "Boilerplate for static HTML projects with webpack",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack --mode=development --watch",
+        "build": "webpack --mode=production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixel-parfait/html-boilerplate.git"
+    },
+    "keywords": [
+        "boilerplate",
+        "html",
+        "sass",
+        "webpack"
+    ],
+    "author": "Pixel Parfait",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/pixel-parfait/html-boilerplate/issues"
+    },
+    "homepage": "https://github.com/pixel-parfait/html-boilerplate#readme",
+    "devDependencies": {
+        "@babel/core": "^7.4.0",
+        "@babel/preset-env": "^7.4.2",
+        "babel-loader": "^8.0.5",
+        "css-loader": "^2.1.1",
+        "file-loader": "^3.0.1",
+        "mini-css-extract-plugin": "^0.5.0",
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.0"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.4.0"
+    }
+}
