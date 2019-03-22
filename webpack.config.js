@@ -45,7 +45,7 @@ module.exports = (env, argv) => {
         },
         {
             test: /\.s?css$/i,
-            use: ['style-loader', 'css-loader?sourceMap=true', 'sass-loader']
+            use: ['style-loader', 'css-loader?sourceMap=true', 'sass-loader', 'postcss-loader']
         });
     }
 
@@ -57,11 +57,7 @@ module.exports = (env, argv) => {
         },
         {
             test: /\.s?css/i,
-            use : [
-                MiniCssExtractPlugin.loader,
-                'css-loader',
-                'sass-loader'
-            ]
+            use : [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader']
         });
     }
 
