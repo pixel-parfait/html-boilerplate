@@ -6,7 +6,7 @@ var config = {
     entry: ['./src/js/app.js', './src/sass/main.scss'],
     output: {
         filename: 'js/bundle.js',
-        path: path.resolve(__dirname, 'public')
+        path: path.resolve(__dirname, 'public/assets')
     },
     module: {
         rules: [
@@ -18,6 +18,11 @@ var config = {
                         name: '[path][name].[ext]'
                     }
                 }
+            },
+            {
+                test: /\.(js)$/,
+                include: path.resolve(__dirname, '../src'),
+                loader: 'babel-loader'
             }
         ]
     },
@@ -30,7 +35,7 @@ var config = {
         })
     ],
     externals: {
-        "jquery": "jQuery"
+        'jquery': 'jQuery'
     }
 };
 
@@ -39,23 +44,13 @@ module.exports = (env, argv) => {
         config.devtool = 'source-map';
 
         config.module.rules.push({
-            test: /\.(js)$/,
-            include: path.resolve(__dirname, '../src'),
-            loader: 'babel-loader'
-        },
-        {
             test: /\.s?css$/i,
-            use: ['style-loader', 'css-loader?sourceMap=true', 'postcss-loader', 'sass-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader?sourceMap=true', 'postcss-loader', 'sass-loader']
         });
     }
 
     if (argv.mode === 'production') {
         config.module.rules.push({
-            test: /\.(js)$/,
-            exclude: /node_modules/,
-            use: 'babel-loader'
-        },
-        {
             test: /\.s?css/i,
             use : [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
         });
