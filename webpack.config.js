@@ -1,66 +1,91 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 var config = {
-    entry: ['./src/js/app.js'],
-    output: {
-        filename: 'js/bundle.js',
-        path: path.resolve(__dirname, 'public/assets')
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(eot|otf|svg|ttf|woff|woff2)(\?.*)?$/,
-                include: [
-                    path.resolve(__dirname, 'src/fonts')
-                ],
-                use: {
-                    loader: 'file-loader',
-                    options: {
-                        outputPath: 'fonts',
-                        publicPath: '../fonts/',
-                        name: '[hash].[ext]'
-                    }
-                }
+  entry: {
+    'app': './src/js/app.js'
+  },
+  output: {
+    filename: 'js/[name].js',
+    path: path.resolve(__dirname, 'public/assets')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(eot|otf|svg|ttf|woff|woff2)(\?.*)?$/,
+        include: [
+          path.resolve(__dirname, '../../fonts')
+        ],
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'fonts',
+            publicPath: '../fonts/',
+            name: '[hash].[ext]'
+          }
+        }
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        exclude: [
+          path.resolve(__dirname, '../../fonts')
+        ],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'img',
+              publicPath: '../img/',
+              name: '[name].[ext]'
             },
-            {
-                test: /\.(png|jpe?g|gif|svg)$/,
-                exclude: [
-                    path.resolve(__dirname, 'src/fonts')
-                ],
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            outputPath: 'img',
-                            name: '[name].[ext]'
-                        },
-                    },
-                ],
+          },
+        ],
+      },
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.s?css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
             },
-            {
-                test: /\.(js)$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
             },
-            {
-                test: /\.s?css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
-            }
+          },
         ]
-    },
-    externals: {
-        jquery: 'jQuery'
-    },
-    plugins: [
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'css/bundle.css'
-        })
+      }
     ]
+  },
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
+    new WebpackNotifierPlugin({
+      alwaysNotify: true
+    }),
+  ]
 };
 
-module.exports = config;
+module.exports = (env, argv) => {
+  if (argv.mode !== 'production') {
+    config.devtool = 'source-map';
+  }
+
+  return config;
+};
