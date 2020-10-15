@@ -16,7 +16,7 @@ var config = {
       {
         test: /\.(eot|otf|svg|ttf|woff|woff2)(\?.*)?$/,
         include: [
-          path.resolve(__dirname, '../../fonts')
+          path.resolve(__dirname, 'src/fonts')
         ],
         use: {
           loader: 'file-loader',
@@ -30,7 +30,7 @@ var config = {
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         exclude: [
-          path.resolve(__dirname, '../../fonts')
+          path.resolve(__dirname, 'src/fonts')
         ],
         use: [
           {
