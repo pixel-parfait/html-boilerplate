@@ -1,2 +1,2 @@
-# html-boilerplate
-Boilerplate for static HTML projects with webpack
+# HTML Boilerplate
+Boilerplate for static HTML projects with Webpack and Bulma
