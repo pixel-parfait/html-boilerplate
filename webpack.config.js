@@ -38,7 +38,7 @@ var config = {
             options: {
               outputPath: 'img',
               publicPath: '../img/',
-              name: '[name].[ext]'
+              name: '[hash].[ext]'
             },
           },
         ],
@@ -70,15 +70,12 @@ var config = {
     ]
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),
     new WebpackNotifierPlugin({
       alwaysNotify: true
-    }),
+    })
   ]
 };
 
