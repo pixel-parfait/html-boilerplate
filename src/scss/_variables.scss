@@ -4,9 +4,26 @@ $body-size: 16px;
 // Colors
 $black: #000000;
 $white: #ffffff;
+$orange: #e67e22;
+$yellow: #f1b70e;
+$green: #2ecc71;
+$turquoise: #1abc9c;
+$blue: #3498db;
+$purple: #8e44ad;
+$red: #e74c3c;
+
+// Derived colors
+$text: $black;
+$primary: $turquoise;
 
 // Typography
 $family-primary: "Arial", "Helvetica", sans-serif;
+$weight-light: 300;
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+$weight-black: 900;
 
 // Sizes
 $size-1: 3rem;
@@ -18,6 +35,7 @@ $size-6: 1rem;
 $size-7: 0.75rem;
 
 // Title
-$title-family: $family-primary;
 $title-color: inherit;
+$title-bold: $weight-black;
 $subtitle-color: inherit;
+$subtitle-weight: $weight-light;
